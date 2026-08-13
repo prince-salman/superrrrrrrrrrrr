@@ -33,6 +33,7 @@ html, body {
   overflow-x: hidden;
   letter-spacing: -0.01em;
   scroll-behavior: smooth;
+  width: 100%;
 }
 
 h1, h2, h3, h4, .font-neo {
@@ -40,6 +41,22 @@ h1, h2, h3, h4, .font-neo {
   letter-spacing: -0.03em;
   font-weight: 900 !important;
   color: #000000;
+}
+
+/* Responsive Hide/Show Helper Classes */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-mobile {
+    display: none !important;
+  }
 }
 
 /* Neobrutalist Cards */
@@ -146,6 +163,11 @@ h1, h2, h3, h4, .font-neo {
   border-radius: 8px !important;
   padding: 2px 10px !important;
   color: #000000 !important;
+  font-size: 11px !important;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Ant Design Global Neobrutalism Overrides */
@@ -190,7 +212,7 @@ h1, h2, h3, h4, .font-neo {
   background: var(--neo-yellow);
   border-bottom: 3px solid #000000;
   white-space: nowrap;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .ticker-move-neo {
@@ -203,8 +225,8 @@ h1, h2, h3, h4, .font-neo {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0 24px;
-  font-size: 13px;
+  margin: 0 16px;
+  font-size: 11px;
   font-weight: 900;
   color: #000000;
   text-transform: uppercase;
@@ -222,13 +244,19 @@ h1, h2, h3, h4, .font-neo {
 }
 
 @media (max-width: 768px) {
+  main {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 84px !important;
+  }
+
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 64px;
+    height: 60px;
     background: #ffffff;
     border-top: 3px solid #000000;
     z-index: 1001;
@@ -256,11 +284,16 @@ h1, h2, h3, h4, .font-neo {
   }
 
   .mobile-nav-item .anticon {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 2px;
   }
 
   body {
-    padding-bottom: 72px !important;
+    padding-bottom: 68px !important;
+  }
+
+  .ant-modal {
+    max-width: calc(100vw - 20px) !important;
+    margin: 10px auto !important;
   }
 }

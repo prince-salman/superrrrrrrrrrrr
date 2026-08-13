@@ -171,11 +171,11 @@ export default function Navbar() {
               src="/logo.png" 
               alt="PresUMart Logo" 
               style={{ 
-                height: 48, 
+                height: 'clamp(32px, 8vw, 44px)', 
                 width: 'auto',
                 objectFit: 'contain',
                 borderRadius: 8,
-                filter: 'drop-shadow(3px 3px 0px #000000)'
+                filter: 'drop-shadow(2px 2px 0px #000000)'
               }} 
             />
           </Link>

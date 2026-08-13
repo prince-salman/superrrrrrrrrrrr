@@ -9,8 +9,7 @@ import {
   HeartOutlined, 
   HeartFilled, 
   UserOutlined, 
-  ShopOutlined, 
-  TagOutlined 
+  ShopOutlined 
 } from '@ant-design/icons';
 import { addToCart, getUser, sendDirectMessage, toggleWishlist, isWishlisted } from '../../lib/store';
 
@@ -97,38 +96,39 @@ export default function ProductCard({ product }: { product: any }) {
     <div className="neo-card" style={{ height: '100%', display: 'flex', flexDirection: 'column', opacity: isOutOfStock ? 0.85 : 1 }}>
       {contextHolder}
 
-      {/* Image Container with Neobrutalism Border */}
+      {/* Image Container */}
       <Link href={`/product?id=${product.id}`}>
-        <div style={{ height: 200, background: '#f4f4f0', borderBottom: '3px solid #000000', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ height: 'clamp(140px, 30vw, 190px)', background: '#f4f4f0', borderBottom: '3px solid #000000', position: 'relative', overflow: 'hidden' }}>
           {/* Wishlist Button */}
           <button
             onClick={handleToggleWishlist}
+            aria-label="Wishlist"
             style={{
               position: 'absolute',
-              top: 10,
-              left: 10,
+              top: 8,
+              left: 8,
               zIndex: 10,
               background: '#ffffff',
               border: '2px solid #000000',
               boxShadow: '2px 2px 0px #000000',
               borderRadius: 8,
-              width: 34,
-              height: 34,
+              width: 30,
+              height: 30,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer'
             }}
           >
-            {favored ? <HeartFilled style={{ color: '#ff2a85', fontSize: 16 }} /> : <HeartOutlined style={{ color: '#000000', fontSize: 16 }} />}
+            {favored ? <HeartFilled style={{ color: '#ff2a85', fontSize: 14 }} /> : <HeartOutlined style={{ color: '#000000', fontSize: 14 }} />}
           </button>
 
           {/* Condition Tag */}
-          <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+          <div style={{ position: 'absolute', top: 8, right: 8, zIndex: 10, maxWidth: '60%' }}>
             {isOutOfStock ? (
-              <span className="neo-tag" style={{ background: '#ff2a85', color: '#ffffff' }}>❌ HABIS</span>
+              <span className="neo-tag" style={{ background: '#ff2a85', color: '#ffffff', fontSize: 10, padding: '1px 6px' }}>❌ HABIS</span>
             ) : (
-              <span className="neo-tag" style={{ background: '#00f0ff' }}>{product.condition || 'Bekas - Like New'}</span>
+              <span className="neo-tag" style={{ background: '#00f0ff', fontSize: 10, padding: '1px 6px' }}>{product.condition || 'Like New'}</span>
             )}
           </div>
 
@@ -143,20 +143,20 @@ export default function ProductCard({ product }: { product: any }) {
             />
           ) : (
             <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#000000' }}>
-              <ShopOutlined style={{ fontSize: 36, marginBottom: 4 }} />
-              <Text strong style={{ fontSize: 11 }}>TIDAK ADA FOTO</Text>
+              <ShopOutlined style={{ fontSize: 28, marginBottom: 2 }} />
+              <Text strong style={{ fontSize: 10 }}>TANPA FOTO</Text>
             </div>
           )}
         </div>
       </Link>
 
       {/* Content Area */}
-      <div style={{ padding: '14px 16px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#ffffff' }}>
+      <div style={{ padding: '10px 12px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#ffffff' }}>
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-            <span className="neo-tag" style={{ background: '#ffe600', fontSize: 10 }}>{product.category}</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4, flexWrap: 'wrap', gap: 4 }}>
+            <span className="neo-tag" style={{ background: '#ffe600', fontSize: 9, padding: '1px 6px' }}>{product.category}</span>
             {product.allowNego !== false && (
-              <span className="neo-tag" style={{ background: '#00e676', fontSize: 10 }}>NEGO OK</span>
+              <span className="neo-tag" style={{ background: '#00e676', fontSize: 9, padding: '1px 6px' }}>NEGO</span>
             )}
           </div>
 
@@ -164,15 +164,15 @@ export default function ProductCard({ product }: { product: any }) {
             <Title
               level={5}
               style={{
-                margin: '6px 0 8px 0',
+                margin: '4px 0 6px 0',
                 fontWeight: 900,
-                fontSize: 15,
+                fontSize: 'clamp(12px, 2.5vw, 14px)',
                 lineHeight: 1.3,
                 display: '-webkit-box',
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                minHeight: 40,
+                minHeight: 34,
                 color: '#000000',
                 fontFamily: 'Syne, sans-serif'
               }}
@@ -181,19 +181,23 @@ export default function ProductCard({ product }: { product: any }) {
             </Title>
           </Link>
 
-          {/* Big Price Display */}
-          <div style={{ margin: '8px 0 12px 0' }}>
+          {/* Price Display */}
+          <div style={{ margin: '6px 0 10px 0' }}>
             <span style={{
               background: '#000000',
               color: '#ffe600',
               fontFamily: 'Syne, sans-serif',
               fontWeight: 900,
-              fontSize: 16,
-              padding: '4px 12px',
-              borderRadius: 8,
+              fontSize: 'clamp(12px, 2.8vw, 15px)',
+              padding: '3px 8px',
+              borderRadius: 6,
               display: 'inline-block',
               border: '2px solid #000000',
-              boxShadow: '2px 2px 0px #ff2a85'
+              boxShadow: '2px 2px 0px #ff2a85',
+              maxWidth: '100%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
             }}>
               {formatPrice(product.price)}
             </span>
@@ -205,28 +209,25 @@ export default function ProductCard({ product }: { product: any }) {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
-            padding: '6px 10px',
-            borderRadius: 8,
+            gap: 6,
+            padding: '4px 6px',
+            borderRadius: 6,
             background: '#faf9f6',
             border: '2px solid #000000',
-            marginBottom: 10
+            marginBottom: 8
           }}>
-            <Avatar size={22} style={{ backgroundColor: '#ff2a85', color: '#ffffff', fontWeight: 900 }} icon={<UserOutlined />}>
+            <Avatar size={18} style={{ backgroundColor: '#ff2a85', color: '#ffffff', fontWeight: 900, fontSize: 9 }} icon={<UserOutlined />}>
               {product.seller ? product.seller.charAt(0).toUpperCase() : 'U'}
             </Avatar>
             <div style={{ minWidth: 0, flex: 1 }}>
-              <Text strong ellipsis style={{ fontSize: 11, display: 'block', lineHeight: 1.2, color: '#000000' }}>
+              <Text strong ellipsis style={{ fontSize: 10, display: 'block', lineHeight: 1.2, color: '#000000' }}>
                 {product.seller}
-              </Text>
-              <Text ellipsis style={{ fontSize: 9, fontWeight: 700, display: 'block', color: '#666' }}>
-                {product.sellerMajor || 'President Univ'}
               </Text>
             </div>
           </div>
 
-          {/* Neobrutalist Action Buttons */}
-          <div style={{ display: 'flex', gap: 6 }}>
+          {/* Action Buttons */}
+          <div style={{ display: 'flex', gap: 4 }}>
             <button
               onClick={handleStartChat}
               style={{
@@ -234,40 +235,40 @@ export default function ProductCard({ product }: { product: any }) {
                 background: '#ffffff',
                 border: '2px solid #000000',
                 boxShadow: '2px 2px 0px #000000',
-                borderRadius: 10,
+                borderRadius: 8,
                 fontWeight: 900,
-                fontSize: 12,
-                padding: '8px 0',
+                fontSize: 10,
+                padding: '6px 0',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 4
+                gap: 2
               }}
             >
-              <MessageOutlined /> Chat
+              <MessageOutlined style={{ fontSize: 11 }} /> Chat
             </button>
 
             <button
               onClick={handleAddToCart}
               disabled={isOutOfStock}
               style={{
-                flex: 1.4,
+                flex: 1.3,
                 background: isOutOfStock ? '#ccc' : '#ffe600',
                 border: '2px solid #000000',
                 boxShadow: isOutOfStock ? 'none' : '2px 2px 0px #000000',
-                borderRadius: 10,
+                borderRadius: 8,
                 fontWeight: 900,
-                fontSize: 12,
-                padding: '8px 0',
+                fontSize: 10,
+                padding: '6px 0',
                 cursor: isOutOfStock ? 'not-allowed' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 4
+                gap: 2
               }}
             >
-              <ShoppingCartOutlined /> Beli!
+              <ShoppingCartOutlined style={{ fontSize: 11 }} /> Beli!
             </button>
           </div>
         </div>
